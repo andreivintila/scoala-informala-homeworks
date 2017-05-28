@@ -8,7 +8,7 @@ import ro.sci.carrental.util.VehicleCategory;
  *
  * @author Vintila Andrei
  */
-public class Car {
+public class Car { 
 
     private String make;
     private String model;
