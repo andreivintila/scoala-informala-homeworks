@@ -1,7 +1,10 @@
 package ro.sci.carrental.domain;
 
+import ro.sci.carrental.util.CustomerAddress;
+import ro.sci.carrental.util.PayMethod;
+
 /**
- * Customes Class hold the first and the last name of a customes
+ * Customes Class hold the first and the last name, the telephone, the address and the payment method of a customer
  *
  * @author Vintila Andrei
  */
@@ -9,10 +12,24 @@ public class Customer {
 
     private String firstName;
     private String lastName;
+    private String telephone;
+    private CustomerAddress customerAddress;
+    private PayMethod payMethod;
 
-    public Customer(String firstName, String lastName) {
-        this.firstName = firstName;
+    /**
+     * Constructor for Customer
+     * @param lastName Last Name
+     * @param firstName First Name
+     * @param telephone Telephone Number
+     * @param customerAddress Customer's Address
+     * @param payMethod The Payment Method used
+     */
+    public Customer(String lastName, String firstName, String telephone, CustomerAddress customerAddress, PayMethod payMethod) {
         this.lastName = lastName;
+        this.firstName = firstName;
+        this.telephone = telephone;
+        this.customerAddress = customerAddress;
+        this.payMethod = payMethod;
     }
 
     public String getFirstName() {
@@ -29,5 +46,29 @@ public class Customer {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public CustomerAddress getCustomerAddress() {
+        return customerAddress;
+    }
+
+    public void setCustomerAddress(CustomerAddress customerAddress) {
+        this.customerAddress = customerAddress;
+    }
+
+    public PayMethod getPayMethod() {
+        return payMethod;
+    }
+
+    public void setPayMethod(PayMethod payMethod) {
+        this.payMethod = payMethod;
     }
 }
