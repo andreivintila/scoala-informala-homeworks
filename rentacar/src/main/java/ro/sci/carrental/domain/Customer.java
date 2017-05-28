@@ -18,8 +18,8 @@ public class Customer {
 
     /**
      * Constructor for Customer
+     * @param lastName Last Name
      * @param firstName First Name
-     * @param firstName Last Name
      * @param telephone Telephone Number
      * @param customerAddress Customer's Address
      * @param payMethod The Payment Method used
