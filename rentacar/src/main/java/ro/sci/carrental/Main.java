@@ -3,10 +3,13 @@ package ro.sci.carrental;
 import ro.sci.carrental.domain.Car;
 import ro.sci.carrental.domain.Customer;
 import ro.sci.carrental.repository.CarRepositoryImpl;
+import ro.sci.carrental.repository.CustomerRepositoryImpl;
 import ro.sci.carrental.service.CarServiceImpl;
+import ro.sci.carrental.service.CustomerServiceImpl;
+import ro.sci.carrental.util.CustomerAddress;
 import ro.sci.carrental.util.FuelType;
 import ro.sci.carrental.util.VehicleCategory;
-import sun.util.resources.cldr.so.CurrencyNames_so;
+import ro.sci.carrental.util.PayMethod;
 
 import java.util.List;
 
@@ -27,9 +30,16 @@ public class Main {
         CarRepositoryImpl carRepository = new CarRepositoryImpl();
 
         //initializam clienti
-        Customer customer1 = new Customer("Popescu", "Virgil");
-        Customer customer2 = new Customer("Mihaila", "Ioan");
-        Customer customer3 = new Customer("Cioran", "Petre");
+        CustomerAddress customerAddress1 = new CustomerAddress("Romania","Sibiu", "strada Avrig, nr. 2");
+        Customer customer1 = new Customer("Popescu", "Virgil", "0745212333", customerAddress1, PayMethod.CASH);
+
+        CustomerAddress customerAddress2 = new CustomerAddress("Romania","Cluj-Napoca", "strada Tabacarilor, nr. 8");
+        Customer customer2 = new Customer("Mihaila", "Ioan", "0752448334", customerAddress2, PayMethod.DEBITCARD);
+
+        CustomerAddress customerAddress3 = new CustomerAddress("Romania","Iasi", "strada Gladiolelor, nr. 15");
+        Customer customer3 = new Customer("Cioran", "Petre", "0722668779", customerAddress3, PayMethod.CASH);
+
+        CustomerRepositoryImpl customerRepository = new CustomerRepositoryImpl();
 
         //introducem masini
         carRepository.add(mercedes);
@@ -38,8 +48,14 @@ public class Main {
         carRepository.add(vw);
         carRepository.add(bmw);
 
+        //introducem clientii;
+        customerRepository.add(customer1);
+        customerRepository.add(customer2);
+        customerRepository.add(customer3);
+
         //efectuam cautari
-        searches(carRepository);
+        searchescars(carRepository);
+        searchescustomers(customerRepository);
 
     }
 
@@ -47,7 +63,8 @@ public class Main {
      * Public static void method searches() runs multiple searches criteria
      * @param carRepository holds the values of car list.
      */
-    private static void searches(CarRepositoryImpl carRepository) {
+    //cautare masini
+    private static void searchescars(CarRepositoryImpl carRepository) {
         //cautarea tuturor masinilor
         System.out.println("Lista masinilor din CarRepositoryImp este: ");
         for (Car car : carRepository.getAll()) {
@@ -85,5 +102,43 @@ public class Main {
             System.out.println(car.getMake() + " " + car.getModel());
         }
         System.out.println("_____________________________________");
+        System.out.println("#####################################");
+        System.out.println("");
+    }
+
+    //cautare clienti
+    /**
+     * Public static void method searches() runs multiple searches criteria
+     * @param customerRepository
+     */
+    private static void searchescustomers (CustomerRepositoryImpl customerRepository) {
+        //cautarea tuturor clientiilor
+        System.out.println("Lista clientilor din sistem este: ");
+        for (Customer customer : customerRepository.getAll()) {
+            System.out.println(customer.getFirstName() + " " + customer.getLastName());
+        }
+        System.out.println("_____________________________________");
+
+        //cautare dupa numele de familie
+        CustomerServiceImpl search4 = new CustomerServiceImpl(customerRepository);
+        List<Customer> findCustomersByLastName = search4.findCustomerByLastName("Cioran");
+
+        System.out.println("Cautarea dupa numele de familie returneaza urmatorii clienti: ");
+        for (Customer customer : findCustomersByLastName) {
+            System.out.println(customer.getLastName() + " " + customer.getFirstName());
+        }
+        System.out.println("_____________________________________");
+
+        //cautare dupa numar de telefon
+        CustomerServiceImpl search5 = new CustomerServiceImpl(customerRepository);
+        List<Customer> findCustomersByTelephone = search5.findCustomerByTelephone("0745212333");
+
+        System.out.println("Cautarea dupa numarul de telefon returneaza urmatorii clienti: ");
+        for (Customer customer : findCustomersByTelephone) {
+            System.out.println(customer.getLastName() + " " + customer.getFirstName());
+        }
+        System.out.println("_____________________________________");
+
+        System.out.println("######################################");
     }
 }

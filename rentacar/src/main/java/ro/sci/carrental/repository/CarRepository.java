@@ -3,7 +3,6 @@ package ro.sci.carrental.repository;
 import ro.sci.carrental.domain.Car;
 import ro.sci.carrental.util.FuelType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,7 +13,7 @@ import java.util.List;
 public interface CarRepository {
 
     /**
-     * Adds a car in the system.
+     * Get all the cars in the system.
      * @return
      */
     List<Car> getAll();
