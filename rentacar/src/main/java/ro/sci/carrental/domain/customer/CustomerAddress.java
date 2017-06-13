@@ -1,4 +1,4 @@
-package ro.sci.carrental.util;
+package ro.sci.carrental.domain.customer;
 
 /**
  * @author Vintila Andrei
@@ -8,10 +8,7 @@ public class CustomerAddress {
     private String city;
     private String streetAddress;
 
-    public CustomerAddress(String country, String city, String streetAddress) {
-        this.country = country;
-        this.city = city;
-        this.streetAddress = streetAddress;
+    public CustomerAddress() {
     }
 
     public String getCountry() {

@@ -1,7 +1,4 @@
-package ro.sci.carrental.domain;
-
-import ro.sci.carrental.util.FuelType;
-import ro.sci.carrental.util.VehicleCategory;
+package ro.sci.carrental.domain.car;
 
 /**
  * Car Class initialization
@@ -18,19 +15,10 @@ public class Car {
     private int gearbox;
     private int noofdoors;
     private int noofseats;
-    private boolean availability;
+    private boolean isAvailable;
 
 
-    public Car(String make, String model, VehicleCategory category, FuelType fueltype, String color,  int gearbox, int noofdors, int noofseats, boolean availability) {
-        this.make = make;
-        this.model = model;
-        this.category = category;
-        this.fueltype = fueltype;
-        this.color = color;
-        this.gearbox = gearbox;
-        this.noofdoors = noofdors;
-        this.noofseats = noofseats;
-        this.availability = availability;
+    public Car() {
     }
 
     public String getMake() {
@@ -97,11 +85,11 @@ public class Car {
         this.noofseats = noofseats;
     }
 
-    public boolean isAvailability() {
-        return availability;
+    public boolean isAvailable(boolean isAvailable) {
+        return isAvailable;
     }
 
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
+    public void setAvailable(boolean isAvailable) {
+        this.isAvailable = isAvailable;
     }
 }

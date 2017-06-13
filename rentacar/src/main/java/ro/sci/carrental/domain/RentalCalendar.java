@@ -1,6 +1,7 @@
 package ro.sci.carrental.domain;
 
-import java.util.Date;
+import ro.sci.carrental.domain.car.Car;
+import ro.sci.carrental.domain.customer.Customer;
 
 /**
  * RentalCalendar class schedules a rental for a car

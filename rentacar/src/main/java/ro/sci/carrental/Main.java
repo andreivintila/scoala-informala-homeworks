@@ -1,14 +1,14 @@
 package ro.sci.carrental;
 
-import ro.sci.carrental.domain.Car;
-import ro.sci.carrental.domain.Customer;
+import ro.sci.carrental.domain.car.Car;
+import ro.sci.carrental.domain.customer.Customer;
 import ro.sci.carrental.repository.CarRepositoryImpl;
 import ro.sci.carrental.service.CarServiceImpl;
 import ro.sci.carrental.service.CustomerServiceImpl;
-import ro.sci.carrental.util.CustomerAddress;
-import ro.sci.carrental.util.FuelType;
-import ro.sci.carrental.util.VehicleCategory;
-import ro.sci.carrental.util.PayMethod;
+import ro.sci.carrental.domain.customer.CustomerAddress;
+import ro.sci.carrental.domain.car.FuelType;
+import ro.sci.carrental.domain.car.VehicleCategory;
+import ro.sci.carrental.domain.customer.PayMethod;
 import ro.sci.carrental.repository.CustomerRepositoryImpl;
 import java.util.List;
 
@@ -21,21 +21,112 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         // initializam masini
-        Car mercedes = new Car("Mercedes", "e220", VehicleCategory.SEDAN, FuelType.DIESEL, "Yellow",5, 4, 4, true);
-        Car audi = new Car("Audi", "A8", VehicleCategory.LIMOUSINE, FuelType.GASOLINE, "Black",6, 4, 4, false);
-        Car dacia = new Car("Dacia", "Logan", VehicleCategory.SEDAN, FuelType.GASOLINE, "White",4, 4, 5, true);
-        Car vw = new Car("Volkswagen", "Touareg", VehicleCategory.JEEP, FuelType.DIESEL, "Blue",6, 4, 5, true);
-        Car bmw = new Car("BMW", "z3", VehicleCategory.SPORT, FuelType.DIESEL, "Red",6, 2, 2, true);
+        Car mercedes = new Car();{
+        mercedes.setMake("Mercedes");
+        mercedes.setModel("e220");
+        mercedes.setCategory(VehicleCategory.SEDAN);
+        mercedes.setFueltype(FuelType.DIESEL);
+        mercedes.setColor("Yellow");
+        mercedes.setGearbox(5);
+        mercedes.setNoofdoors(4);
+        mercedes.setNoofseats(4);
+        mercedes.isAvailable(true);
+        }
+
+        Car audi = new Car();{
+            audi.setMake("Audi");
+            audi.setModel("A8");
+            audi.setCategory(VehicleCategory.LIMOUSINE);
+            audi.setFueltype(FuelType.GASOLINE);
+            audi.setColor("Black");
+            audi.setGearbox(6);
+            audi.setNoofdoors(4);
+            audi.setNoofseats(4);
+            audi.isAvailable(false);
+        }
+
+        Car dacia = new Car();{
+            dacia.setMake("Dacia");
+            dacia.setModel("Logan");
+            dacia.setCategory(VehicleCategory.SEDAN);
+            dacia.setFueltype(FuelType.GASOLINE);
+            dacia.setColor("White");
+            dacia.setGearbox(4);
+            dacia.setNoofdoors(4);
+            dacia.setNoofseats(5);
+            dacia.isAvailable(true);
+        }
+
+        Car vw = new Car();{
+            vw.setMake("Volkswagen");
+            vw.setModel("Touareg");
+            vw.setCategory(VehicleCategory.JEEP);
+            vw.setFueltype(FuelType.GASOLINE);
+            vw.setColor("Blue");
+            vw.setGearbox(6);
+            vw.setNoofdoors(4);
+            vw.setNoofseats(4);
+            vw.isAvailable(true);
+        }
+
+        Car bmw = new Car();{
+            bmw.setMake("BMW");
+            bmw.setModel("z3");
+            bmw.setCategory(VehicleCategory.SPORT);
+            bmw.setFueltype(FuelType.DIESEL);
+            bmw.setColor("Red");
+            bmw.setGearbox(6);
+            bmw.setNoofdoors(2);
+            bmw.setNoofseats(2);
+            bmw.isAvailable(true);
+        }
+
         CarRepositoryImpl carRepository = new CarRepositoryImpl();
 
         //initializam clienti
-        CustomerAddress customerAddress1 = new CustomerAddress("Romania", "Sibiu", "Str Avrig, nr. 2");
-        Customer customer1 = new Customer("Popescu", "Virgil", "0745909213", customerAddress1, PayMethod.CASH);
-        CustomerAddress customerAddress2 = new CustomerAddress("Romania", "Iasi", "Str Paris, nr. 12");
-        Customer customer2 = new Customer("Mihaila", "Ioan", "0745212333", customerAddress2, PayMethod.DEBITCARD);
-        CustomerAddress customerAddress3 = new CustomerAddress("Romania", "Cluj-Napoca", "Str Gladiolelor, nr. 3");
-        Customer customer3 = new Customer("Cioran", "Petre","0788996331", customerAddress3, PayMethod.DEBITCARD);
-        CustomerRepositoryImpl customerRepository = new CustomerRepositoryImpl();
+        CustomerAddress customerAddress1 = new CustomerAddress();{
+            customerAddress1.setCountry("Romania");
+            customerAddress1.setCity("Sibiu");
+            customerAddress1.setStreetAddress("Str Avrig, nr. 2");
+        }
+
+        Customer customer1 = new Customer();{
+            customer1.setFirstName("Virgil");
+            customer1.setLastName("Popescu");
+            customer1.setTelephone("0745909213");
+            customer1.setCustomerAddress(customerAddress1);
+            customer1.setPayMethod(PayMethod.CASH);
+        }
+
+        CustomerAddress customerAddress2 = new CustomerAddress();{
+            customerAddress2.setCountry("Romania");
+            customerAddress2.setCity("Iasi");
+            customerAddress2.setStreetAddress("Str Paris, nr. 12");
+        }
+
+        Customer customer2 = new Customer();{
+            customer2.setFirstName("Ioan");
+            customer2.setLastName("Mihaila");
+            customer2.setTelephone("0745212333");
+            customer2.setCustomerAddress(customerAddress2);
+            customer2.setPayMethod(PayMethod.DEBITCARD);
+        }
+
+       CustomerAddress customerAddress3 = new CustomerAddress();{
+            customerAddress2.setCountry("Romania");
+            customerAddress2.setCity("Cluj-Napoca");
+            customerAddress2.setStreetAddress("Str Gladiolelor, nr. 3");
+        }
+
+       Customer customer3 = new Customer();{
+            customer3.setFirstName("Petre");
+            customer3.setLastName("Cioran");
+            customer3.setTelephone("0788996331");
+            customer3.setCustomerAddress(customerAddress3);
+            customer3.setPayMethod(PayMethod.DEBITCARD);
+        }
+
+       CustomerRepositoryImpl customerRepository = new CustomerRepositoryImpl();
 
         //introducem masini
         carRepository.add(mercedes);
@@ -48,6 +139,7 @@ public class Main {
         customerRepository.add(customer1);
         customerRepository.add(customer2);
         customerRepository.add(customer3);
+
         //efectuam cautari
         searchescars(carRepository);
         searchescustomers(customerRepository);
@@ -68,7 +160,7 @@ public class Main {
 
         //cautare dupa marca
         CarServiceImpl search1 = new CarServiceImpl(carRepository);
-        List<Car> foundCarsByMake = search1.findCarsByMake("Audi");
+        List<Car> foundCarsByMake = search1.findCarsByMake("Mercedes");
 
         System.out.println("Cautarea dupa Marca returneaza urmatoarele masini: ");
         for (Car car : foundCarsByMake) {
@@ -77,28 +169,25 @@ public class Main {
         System.out.println("_____________________________________");
 
         //cautare dupa marca si model
-        CarServiceImpl search2 = new CarServiceImpl(carRepository);
-        List<Car> foundCarsByMakeAndModel = search2.findCarsByMakeAndModel("Mercedes", "e220");
+      CarServiceImpl search2 = new CarServiceImpl(carRepository);
+       List<Car> foundCarsByMakeAndModel = search2.findCarsByMakeAndModel("BMW", "z3");
 
-        System.out.println("Cautarea dupa Marca si Model returneaza urmatoarele masini: ");
-        for (Car car : foundCarsByMakeAndModel) {
+       System.out.println("Cautarea dupa Marca si Model returneaza urmatoarele masini: ");
+       for (Car car : foundCarsByMakeAndModel) {
             System.out.println(car.getMake() + " " + car.getModel());
         }
-        System.out.println("_____________________________________");
+       System.out.println("_____________________________________");
 
-        //cautare dupa Marca, Model, Culoare si Locuri
+       //cautare dupa Marca, Model, Culoare si Locuri
         CarServiceImpl search3 = new CarServiceImpl(carRepository);
-        List<Car> foundCarsByMultipleCategories = search3.findCarsByMultipleCategories(
-                "Dacia", "Logan", "White", 5);
+       List<Car> foundCarsByMultipleCategories = search3.findCarsByMultipleCategories("Dacia", "Logan", "White", 5);
 
-        System.out.println("Cautarea dupa Marca, Model, Culoare si Locuri returneaza urmatoarele masini: ");
+       System.out.println("Cautarea dupa Marca, Model, Culoare si Locuri returneaza urmatoarele masini: ");
         for (Car car : foundCarsByMultipleCategories) {
-            System.out.println(car.getMake() + " " + car.getModel());
+           System.out.println(car.getMake() + " " + car.getModel());
         }
-        System.out.println("_____________________________________");
-        System.out.println("#####################################");
-        System.out.println("");
-    }
+       System.out.println("_____________________________________");
+   }
 
     public static void searchescustomers(CustomerRepositoryImpl customerRepository) {
         //cautarea tuturor clientilor
@@ -122,11 +211,10 @@ public class Main {
         CustomerServiceImpl search5 = new CustomerServiceImpl(customerRepository);
         List<Customer> foundCustomersByTelephone = search5.findCustomerByTelephone("0745212333");
 
-        System.out.println("Cautarea dupa numele de familie returneaza urmatorii clienti: ");
+        System.out.println("Cautarea dupa numarul de telefon returneaza urmatorii clienti: ");
         for (Customer customer : foundCustomersByTelephone) {
             System.out.println(customer.getLastName() + " " + customer.getFirstName());
         }
         System.out.println("_____________________________________");
-        System.out.println("#####################################");
     }
 }
