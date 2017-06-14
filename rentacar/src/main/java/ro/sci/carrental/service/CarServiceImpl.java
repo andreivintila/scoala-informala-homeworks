@@ -4,7 +4,9 @@ import ro.sci.carrental.domain.car.Car;
 import ro.sci.carrental.repository.CarRepositoryImpl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * implementations of inferface CarService
@@ -28,7 +30,7 @@ public class CarServiceImpl implements CarService {
     public List<Car> findCarsByMake(String make) {
         List<Car> foundCars = new ArrayList<Car>();
 
-        for (Car car : carRepository.getAll()) {
+        for (Car car : carRepository.findAll()) {
             if (car.getMake().equalsIgnoreCase(make)) {
                 foundCars.add(car);
             }
@@ -46,7 +48,7 @@ public class CarServiceImpl implements CarService {
     public List<Car> findCarsByMakeAndModel(String make, String model) {
         List<Car> foundCars = new ArrayList<Car>();
 
-        for (Car car : carRepository.getAll()) {
+        for (Car car : carRepository.findAll()) {
             if ((car.getModel().equalsIgnoreCase(model)) && (car.getMake().equalsIgnoreCase(make))) {
                 foundCars.add(car);
             }
@@ -66,7 +68,7 @@ public class CarServiceImpl implements CarService {
     public List<Car> findCarsByMultipleCategories(String make, String model, String color, int noofseats) {
         List<Car> foundCars = new ArrayList<Car>();
 
-        for (Car car : carRepository.getAll()) {
+        for (Car car : carRepository.findAll()) {
             if ((car.getModel().equalsIgnoreCase(model)) && (car.getMake().equalsIgnoreCase(make))
                     && (car.getColor().equalsIgnoreCase(color)) && (car.getNoofseats() == noofseats)) {
                 foundCars.add(car);
