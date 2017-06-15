@@ -2,7 +2,9 @@ package ro.sci.carrental;
 
 import ro.sci.carrental.domain.car.Car;
 import ro.sci.carrental.domain.customer.Customer;
+import ro.sci.carrental.repository.CarRepository;
 import ro.sci.carrental.repository.CarRepositoryImpl;
+import ro.sci.carrental.service.CarService;
 import ro.sci.carrental.service.CarServiceImpl;
 import ro.sci.carrental.service.CustomerServiceImpl;
 import ro.sci.carrental.domain.customer.CustomerAddress;
@@ -129,11 +131,13 @@ public class Main {
        CustomerRepositoryImpl customerRepository = new CustomerRepositoryImpl();
 
         //introducem masini
-        carRepository.add(mercedes);
-        carRepository.add(audi);
-        carRepository.add(dacia);
-        carRepository.add(vw);
-        carRepository.add(bmw);
+        carRepository.create(mercedes);
+        carRepository.create(audi);
+        carRepository.create(dacia);
+        carRepository.create(vw);
+        carRepository.create(bmw);
+
+
 
         //introducem clinetii
         customerRepository.add(customer1);
@@ -143,6 +147,8 @@ public class Main {
         //efectuam cautari
         searchescars(carRepository);
         searchescustomers(customerRepository);
+        deletecars(carRepository);
+
 
     }
 
@@ -153,7 +159,7 @@ public class Main {
     private static void searchescars(CarRepositoryImpl carRepository) {
         //cautarea tuturor masinilor
         System.out.println("Lista masinilor din CarRepositoryImp este: ");
-        for (Car car : carRepository.getAll()) {
+        for (Car car : carRepository.findAll()) {
             System.out.println(car.getMake());
         }
         System.out.println("_____________________________________");
@@ -187,7 +193,18 @@ public class Main {
            System.out.println(car.getMake() + " " + car.getModel());
         }
        System.out.println("_____________________________________");
-   }
+    }
+
+    private static void deletecars(CarRepositoryImpl carRepository){
+        carRepository.delete(bmw);
+        System.out.println("Lista masinilor din CarRepositoryImpl dupa stergere este: ");
+        for (Car car : carRepository.findAll()) {
+            System.out.println(car.getMake());
+        }
+        System.out.println("_____________________________________");
+
+    }
+
 
     public static void searchescustomers(CustomerRepositoryImpl customerRepository) {
         //cautarea tuturor clientilor

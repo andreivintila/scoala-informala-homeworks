@@ -3,6 +3,7 @@ package ro.sci.carrental.repository;
 import ro.sci.carrental.domain.car.Car;
 import ro.sci.carrental.domain.car.FuelType;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -16,31 +17,24 @@ public interface CarRepository {
      * Get all the cars in the system.
      * @return
      */
-    List<Car> getAll();
+    List<Car> findAll();
 
     /**
      * Return all the cars of a certain maker
      * @param make
      * @return List<Car>
      */
-    List<Car> getCarsByMake(String make);
+    List<Car> findCarsByMake(String make);
 
-    /**
-     * Return all cars by fuel type
-     * @param fuelType
-     * @return List<Car>
-     */
-    List<Car> getCarsByFuelType(FuelType fuelType);
 
     /**
      * Adds a car in the system
      * @param car
      */
-    void add(Car car);
+    void create(Car car);
 
     /**
-     * deletes a car in the system
-     * @param car
+     *
      */
     void delete(Car car);
 
