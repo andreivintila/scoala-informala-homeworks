@@ -25,20 +25,16 @@ public class CarRepositoryImpl implements CarRepository {
         return null;
     }
 
-    public void create(Car car) {
+    public void add(Car car) {
         cars.add(car);
     }
 
     public void delete(Car car) {
-        Iterator it = cars.iterator();
-        while (it.hasNext()) {
-            if (it.next().equals(car)) {
-                it.remove();
-            }
-        }
+        cars.removeIf(anotherCar -> anotherCar.equals(car));
     }
 
     public void update(Car car) {
+        cars.set(cars.indexOf(car), (Car) car);
     }
 
 }

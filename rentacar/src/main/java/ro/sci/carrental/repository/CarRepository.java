@@ -31,7 +31,7 @@ public interface CarRepository {
      * Adds a car in the system
      * @param car
      */
-    void create(Car car);
+    void add(Car car);
 
     /**
      *

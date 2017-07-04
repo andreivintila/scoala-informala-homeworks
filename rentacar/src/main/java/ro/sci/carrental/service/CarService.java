@@ -17,6 +17,5 @@ public interface CarService {
 
     List<Car> findCarsByMultipleCategories(String make, String model, String color, int seats);
 
-
 }
 
