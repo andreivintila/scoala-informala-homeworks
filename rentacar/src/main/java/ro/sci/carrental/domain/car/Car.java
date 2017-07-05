@@ -16,6 +16,7 @@ public class Car {
     private int noofdoors;
     private int noofseats;
     private boolean isAvailable;
+    private Price rentPrice;
 
 
     public Car() {
@@ -91,5 +92,13 @@ public class Car {
 
     public void setAvailable(boolean isAvailable) {
         this.isAvailable = isAvailable;
+    }
+
+    public Price getRentPrice() {
+        return rentPrice;
+    }
+
+    public void setRentPrice(Price rentPrice) {
+        this.rentPrice = rentPrice;
     }
 }

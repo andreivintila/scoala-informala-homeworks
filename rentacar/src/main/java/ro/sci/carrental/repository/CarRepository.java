@@ -17,30 +17,30 @@ public interface CarRepository {
      * Get all the cars in the system.
      * @return
      */
-    List<Car> findAll();
+    <T> List<T> findAll();
 
     /**
      * Return all the cars of a certain maker
-     * @param make
+     * @param v
      * @return List<Car>
      */
-    List<Car> findCarsByMake(String make);
+    <T extends Car, V> List<T> findCarsByMake(V v);
 
 
     /**
      * Adds a car in the system
      * @param car
      */
-    void add(Car car);
+    <T> void add(T car);
 
     /**
      *
      */
-    void delete(Car car);
+    <T> void delete(T car);
 
     /**
      * updates a car in the system
      * @param car
      */
-    void update(Car car);
+    <T> void update(T car);
 }
