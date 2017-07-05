@@ -13,5 +13,11 @@ public class CarSimulation {
             System.out.println(car.getMake());
         }
         System.out.println("_____________________________________");
+        System.out.println("Lista masinilor din CarRepositoryImpl este dupa fabricant: ");
+            for (Car car : carRepository.findAll()) {
+            if(car.getMake().equalsIgnoreCase("audi"))
+            System.out.println(car.getMake());
+        }
+        System.out.println("_____________________________________");
     }
 }

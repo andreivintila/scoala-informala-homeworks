@@ -1,11 +1,8 @@
 package ro.sci.carrental.repository;
 
 import ro.sci.carrental.domain.car.Car;
-import ro.sci.carrental.domain.car.FuelType;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -15,25 +12,33 @@ import java.util.List;
  */
 public class CarRepositoryImpl implements CarRepository {
 
-    private List<Car> cars = new ArrayList<Car>();
+    private List<Car> cars = new ArrayList<>();
 
     public List<Car> findAll() {
         return cars;
     }
 
-    public List<Car> findCarsByMake(String make) {
-        return null;
+    public <T extends Car, V> List<T> findCarsByMake(V make) {
+        List<T> seachedCars = new ArrayList<>();
+
+        for (ro.sci.carrental.domain.car.Car car: cars) {
+            if (cars.contains(car.getMake())) {
+                seachedCars.add((T) car);
+            }
+        }
+        return seachedCars;
     }
 
-    public void add(Car car) {
-        cars.add(car);
+
+    public <T> void add(T car) {
+        cars.add((Car) car);
     }
 
-    public void delete(Car car) {
+    public <T> void delete(T car) {
         cars.removeIf(anotherCar -> anotherCar.equals(car));
     }
 
-    public void update(Car car) {
+    public <T> void update(T car) {
         cars.set(cars.indexOf(car), (Car) car);
     }
 
