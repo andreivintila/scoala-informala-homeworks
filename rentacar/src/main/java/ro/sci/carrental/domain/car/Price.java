@@ -1,20 +1,42 @@
 package ro.sci.carrental.domain.car;
 
+import java.text.DecimalFormat;
+
 /**
  * Created by ADMIN on 05-Jul-17.
  */
 public class Price {
-        private double pricePerDay;
+    private double value;
+    private String formattedValue;
 
-    public Price(double pricePerDay) {
-        this.pricePerDay = pricePerDay;
+    public Price() {
     }
 
-    public double getPricePerDay() {
-        return pricePerDay;
+    public Price(double value) {
+
+        this.value = value;
+        DecimalFormat df = new DecimalFormat("###.00");
+        this.formattedValue = df.format(this.value);
     }
 
-    public void setPricePerDay(double pricePerDay) {
-        this.pricePerDay = pricePerDay;
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public String getFormattedValue() {
+        return formattedValue;
+    }
+
+    public void setFormattedValue(String formattedValue) {
+        this.formattedValue = formattedValue;
+    }
+
+    @Override
+    public String toString() {
+        return formattedValue;
     }
 }

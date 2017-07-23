@@ -9,43 +9,45 @@ import java.util.List;
  *
  * @author Vintila Andrei
  */
-public interface CustomerRepository {
-
+public interface CustomerRepository<T extends Customer> {
     /**
-     * Gets all the customers in the system.
-     * @return
+     * Get all Customers in the system.
+     * @return List<T>
      */
-    List<Customer> getAll();
-
+    List<T> getAll();
     /**
-     * Return all the customers of a certain last name
-     * @param lastName
+     * Get Customers by LastName.
      * @return List<Customer>
      */
-    List<Customer> getCustomerbyLastName(String lastName);
+    List<T> getCustomerByLastName(String lastName);
+    /**
+     * Get Customers by Full Name.
+     * @return List<T>
+     */
+    List<T> getCustomerByFullName(String firstName, String lastName);
+    /**
+     * Get Customers by Telephone number.
+     * @return List<T>
+     */
+    List<T> getCustomerByTelephone(String telephone);
 
     /**
-     * Get customers by telephone
-     * @param telephone
-     * @return List<Car>
+     * Add a customer in the system.
      */
-    List<Customer> getCustomerByTelephone(String telephone);
+    void add(T customer);
 
     /**
-     * Adds a customer in the system
-     * @param customer
+     * Add all customers in the system.
      */
-    void add(Customer customer);
+    void addAll(List<T> customers);
 
     /**
-     * Bans a customers in the system
-     * @param customer
+     * Delete a customer from the system.
      */
-    void ban (Customer customer);
+    void delete(T customer);
 
     /**
-     * Updates a customer in the system
-     * @param customer
+     * Update a customer details.
      */
-    void update(Customer customer);
+    void update(T customer);
 }

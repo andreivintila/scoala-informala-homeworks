@@ -1,0 +1,4 @@
+VW,Golf,SPORT,GASOLINE,black,5,2,4,true,25
+Skoda,Octavia,SEDAN,DIESEL,white,5,5,5,false,30
+Aro,Maxi,JEEP,DIESEL,green,6,5,5,true,45
+Opel,Insigna,LIMOUSINE,GASOLINE,red,6,5,5,false,50

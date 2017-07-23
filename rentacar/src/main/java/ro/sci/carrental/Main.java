@@ -2,12 +2,22 @@ package ro.sci.carrental;
 
 import ro.sci.carrental.domain.car.Car;
 import ro.sci.carrental.domain.customer.Customer;
+import ro.sci.carrental.reader.*;
+import ro.sci.carrental.repository.CarRepository;
 import ro.sci.carrental.repository.CarRepositoryImpl;
-import ro.sci.carrental.domain.car.FuelType;
-import ro.sci.carrental.domain.car.VehicleCategory;
+import ro.sci.carrental.repository.CustomerRepository;
 import ro.sci.carrental.repository.CustomerRepositoryImpl;
+import ro.sci.carrental.service.CarService;
+import ro.sci.carrental.service.CarServiceImpl;
+import ro.sci.carrental.service.CustomerService;
+import ro.sci.carrental.service.CustomerServiceImpl;
 import ro.sci.carrental.simulation.CarSimulation;
 import ro.sci.carrental.simulation.CustomerSimulation;
+import ro.sci.carrental.writer.CarWriter;
+import ro.sci.carrental.writer.CustomerWriter;
+
+import java.io.File;
+import java.util.List;
 
 
 /**
@@ -17,28 +27,28 @@ import ro.sci.carrental.simulation.CustomerSimulation;
  */
 public class Main {
 
-    public static void main(String[] args) {
-        // initializam masini
-        Car mercedes = new Car();
-        mercedes.setMake("mercedes");
-        Car audi = new Car();
-        audi.setMake("audi");
+    public static void main(String[] args) throws InvalidEntityException {
 
-        //adaugam masini in repository
-        CarRepositoryImpl carRepository = new CarRepositoryImpl();
-        carRepository.add(mercedes);
-        carRepository.add(audi);
+        File carsFile = new File("cars.txt");
+        EntityReader entityReader = new EntityReader();
+        List<String> carLines = entityReader.readLines(carsFile);
+        Convertor<Car> carConvertor = new CarConvertor();
+        CarRepository<Car> carRepository = new CarRepositoryImpl();
+        CarService<Car> carService = new CarServiceImpl(carRepository);
 
-        //initializam clienti
-        Customer customer1 = new Customer();
-        customer1.setFirstName("Virgil");
-        Customer customer2 = new Customer();
-        customer2.setFirstName("Ioan");
+        for (String line : carLines) {
+            carService.add(carConvertor.convert(line));
+        }
 
-        //adaugam clinetii in repository
-        CustomerRepositoryImpl customerRepository = new CustomerRepositoryImpl();
-        customerRepository.add(customer1);
-        customerRepository.add(customer2);
+        File customerFile = new File("customers.txt");
+        List<String> customerLines = entityReader.readLines(customerFile);
+        Convertor<Customer> customerConvertor = new CustomerConvertor();
+        CustomerRepository<Customer> customerRepository = new CustomerRepositoryImpl();
+        CustomerService<Customer> customerService = new CustomerServiceImpl(customerRepository);
+
+        for (String line : customerLines) {
+            customerService.add(customerConvertor.convert(line));
+        }
 
         //cautam masini
         CarSimulation carSimulation = new CarSimulation();
@@ -48,13 +58,13 @@ public class Main {
         CustomerSimulation customerSimulation = new CustomerSimulation();
         customerSimulation.searches(customerRepository);
 
-        //stergem o masina din repository
-        carRepository.delete(audi);
-        System.out.println("Lista masinilor din CarRepositoryImpl este: ");
-        for (Car car : carRepository.findAll()) {
-            System.out.println(car.getMake());
-        }
-        System.out.println("_____________________________________");
+        File outCars = new File("outcars.txt");
+        CarWriter carWriter = new CarWriter();
+        carWriter.writeObjects(carRepository.getAll(), outCars);
+
+        File outCustomers = new File("outcustomers.txt");
+        CustomerWriter customerWriter = new CustomerWriter();
+        customerWriter.writeObjects(customerRepository.getAll(), outCustomers);
 
 
     }

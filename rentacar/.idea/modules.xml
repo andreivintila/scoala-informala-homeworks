@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/../../../cursuri/junit/junit.iml" filepath="$PROJECT_DIR$/../../../cursuri/junit/junit.iml" />
+      <module fileurl="file://D:\SCIIT\cursuri\junit\junit.iml" filepath="D:\SCIIT\cursuri\junit\junit.iml" />
       <module fileurl="file://$PROJECT_DIR$/rentacar.iml" filepath="$PROJECT_DIR$/rentacar.iml" />
     </modules>
   </component>

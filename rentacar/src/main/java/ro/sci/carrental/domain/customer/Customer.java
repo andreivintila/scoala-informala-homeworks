@@ -60,4 +60,5 @@ public class Customer {
     public void setPayMethod(PayMethod payMethod) {
         this.payMethod = payMethod;
     }
+
 }

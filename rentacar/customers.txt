@@ -1,0 +1,4 @@
+Andrei,Popescu,0765123584,Cluj-Napoca,Str. Paris Nr.15,CASH
+Claudiu,Ardelean,0727845674,Sibiu,,Str. Galati Nr.4,CREDITCARD
+Roxana,Maria,0755587446,Bacau,Str. Bucuresti Nr.84,CASH
+Viorel,Grigore,0787258624,Pitesti,,Str. Fanetelor Nr.6,CREDITCARD

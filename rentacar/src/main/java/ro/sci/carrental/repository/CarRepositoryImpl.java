@@ -10,36 +10,58 @@ import java.util.List;
  *
  * @author Vintila Andrei
  */
-public class CarRepositoryImpl implements CarRepository {
+public class CarRepositoryImpl implements CarRepository<Car> {
 
     private List<Car> cars = new ArrayList<>();
 
-    public List<Car> findAll() {
+
+    public List<Car> getAll() {
         return cars;
     }
 
-    public <T extends Car, V> List<T> findCarsByMake(V make) {
-        List<T> seachedCars = new ArrayList<>();
+    @Override
+    public List<Car> getCarsByFuelType(String fuelType) {
+        List<Car> seachedCars = new ArrayList<>();
 
-        for (ro.sci.carrental.domain.car.Car car: cars) {
-            if (cars.contains(car.getMake())) {
-                seachedCars.add((T) car);
+        for (Car car : cars) {
+            if (cars.contains(fuelType)) {
+                seachedCars.add(car);
             }
+
         }
+
         return seachedCars;
     }
 
+    public List<Car> getCarsByMake(String make) {
+        List<Car> seachedCars = new ArrayList<>();
 
-    public <T> void add(T car) {
-        cars.add((Car) car);
+        for (Car car : cars) {
+            if (cars.contains(car.getMake())) {
+                seachedCars.add(car);
+            }
+
+        }
+
+        return seachedCars;
     }
 
-    public <T> void delete(T car) {
+    @Override
+    public void add(Car car) {
+        cars.add(car);
+    }
+
+    @Override
+    public void addAll(List<Car> cars) {
+        this.cars.addAll(cars);
+    }
+
+    public void delete(Car car) {
         cars.removeIf(anotherCar -> anotherCar.equals(car));
     }
 
-    public <T> void update(T car) {
-        cars.set(cars.indexOf(car), (Car) car);
+    public void update(Car car) {
+        cars.set(cars.indexOf(car), car);
     }
-
 }
+
