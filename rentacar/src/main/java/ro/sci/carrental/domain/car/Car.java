@@ -10,7 +10,7 @@ public class Car {
     private String make;
     private String model;
     private VehicleCategory category;
-    private FuelType fueltype;
+    private FuelType fuelType;
     private String color;
     private int gearbox;
     private int noofdoors;
@@ -47,11 +47,11 @@ public class Car {
     }
 
     public FuelType getFueltype() {
-        return fueltype;
+        return fuelType;
     }
 
     public void setFueltype(FuelType fueltype) {
-        this.fueltype = fueltype;
+        this.fuelType = fuelType;
     }
 
     public String getColor() {
@@ -100,5 +100,13 @@ public class Car {
 
     public void setRentPrice(Price rentPrice) {
         this.rentPrice = rentPrice;
+    }
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(make).append(",").append(model).append(",").append(category).append(",").append(fuelType).append(",").append(color)
+                .append(",").append(gearbox).append(",").append(noofdoors).append(",").append(noofseats)
+                .append(",").append(isAvailable).append(",").append(rentPrice);
+        return result.toString();
     }
 }

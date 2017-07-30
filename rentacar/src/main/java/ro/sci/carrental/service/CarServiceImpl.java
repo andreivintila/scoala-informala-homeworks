@@ -83,10 +83,9 @@ public class CarServiceImpl implements CarService<Car> {
      * @param make  value of car make
      * @param model value of car model
      * @param color value of car color
-     * @param seats value of car seats
      * @return list of found cars
      */
-    public List<Car> findCarsByMakeModelColorAndSeats(String make, String model, String color, String seats) {
+    public List<Car> findCarsByMakeModelColor(String make, String model, String color) {
         List<Car> foundCars = new ArrayList<>();
 
         for (Car car : carRepository.getAll()) {

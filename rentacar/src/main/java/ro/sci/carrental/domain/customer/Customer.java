@@ -61,4 +61,12 @@ public class Customer {
         this.payMethod = payMethod;
     }
 
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append(firstName).append(",").append(lastName).append(",")
+                .append(telephone).append(",").append(customerAddress).append(",")
+                .append(payMethod);
+        return result.toString();
+    }
 }

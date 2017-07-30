@@ -4,7 +4,6 @@ package ro.sci.carrental.domain.customer;
  * @author Vintila Andrei
  */
 public class CustomerAddress {
-    private String country;
     private String city;
     private String streetAddress;
 

@@ -5,5 +5,5 @@ package ro.sci.carrental.domain.customer;
  */
 public enum PayMethod {
 
-DEBITCARD, CASH;
+CREDITCARD, CASH
 }

@@ -55,9 +55,8 @@ public interface CarService<T> {
      * @param make
      * @param model
      * @param color
-     * @param seats
      * @return List<Car>
      */
-    List<T> findCarsByMakeModelColorAndSeats(String make, String model, String color, String seats);
+    List<T> findCarsByMakeModelColor(String make, String model, String color);
 }
 
