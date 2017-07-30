@@ -11,36 +11,55 @@ import java.util.List;
  *
  * @author Vintila Andrei
  */
-public interface CarRepository {
-
+public interface CarRepository<T extends Car>  extends Repository<T>{
     /**
-     * Get all the cars in the system.
-     * @return
+     * Get all cars in the system
+     *
+     * @return List<Car>
      */
-    List<Car> findAll();
+    List<T> getAll();
 
     /**
      * Return all the cars of a certain maker
-     * @param make
+     *
+     * @param v
      * @return List<Car>
      */
-    List<Car> findCarsByMake(String make);
-
-
-    /**
-     * Adds a car in the system
-     * @param car
-     */
-    void add(Car car);
+    List<T> getCarsByMake(String v);
 
     /**
+     * Return all cars by fuel type
      *
+     * @param v
+     * @return List<Car>
      */
-    void delete(Car car);
+    List<T> getCarsByFuelType(String v);
 
     /**
-     * updates a car in the system
-     * @param car
+     * Add a car in the system.
+     *
+     * @param t
      */
-    void update(Car car);
+    void add(T t);
+
+    /**
+     * Add all cars in the system.
+     *
+     * @param t
+     */
+    void addAll(List<T> t);
+
+    /**
+     * Delete a car from the system.
+     *
+     * @param t
+     */
+    void delete(T t);
+
+    /**
+     * Updates car information in the system.
+     *
+     * @param t
+     */
+    void update(T t);
 }
