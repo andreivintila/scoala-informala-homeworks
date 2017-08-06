@@ -10,7 +10,7 @@ import java.util.List;
  *
  * Created by ADMIN on 28-May-17.
  */
-public class CustomerRepositoryImpl implements CustomerRepository {
+public class CustomerRepositoryImpl implements CustomerRepository<Customer> {
 
     private List<Customer> customers = new ArrayList<Customer>();
 
@@ -18,11 +18,11 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return customers;
     }
 
-    public List<Customer> getCustomerbyLastName(String lastName) {
+    public List<Customer> getCustomerByLastName(String lastName) {
         return null;
     }
 
-    public List<Customer> getCustomersbyFirstName(String firstName) {
+    public List<Customer> getCustomerByFullName(String firstName, String lastName) {
         return null;
     }
 
@@ -30,13 +30,20 @@ public class CustomerRepositoryImpl implements CustomerRepository {
         return null;
     }
 
+
     public void add(Customer customer) {
         customers.add(customer);
     }
 
-    public void ban(Customer customer) {
+    public void addAll(List<Customer> customers) {
+        customers.addAll(customers);
+    }
+
+    public void delete(Customer customer) {
+        customers.removeIf(anotherCustomer -> anotherCustomer.equals(customer));
     }
 
     public void update(Customer customer) {
+        customers.set(customers.indexOf(customer), customer);
     }
 }

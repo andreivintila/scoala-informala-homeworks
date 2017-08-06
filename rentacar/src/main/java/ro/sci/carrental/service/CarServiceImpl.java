@@ -1,6 +1,7 @@
 package ro.sci.carrental.service;
 
 import ro.sci.carrental.domain.car.Car;
+import ro.sci.carrental.repository.CarRepository;
 import ro.sci.carrental.repository.CarRepositoryImpl;
 
 import java.util.ArrayList;
@@ -13,24 +14,41 @@ import java.util.Vector;
  *
  * @author Vintila Andrei
  */
-public class CarServiceImpl implements CarService {
+public class CarServiceImpl implements CarService<Car> {
 
+    private CarRepository<Car> carRepository;
 
-    private CarRepositoryImpl carRepository;
+    public CarServiceImpl(CarRepository carRepository) {
 
-    public CarServiceImpl(CarRepositoryImpl carRepository) {
         this.carRepository = carRepository;
     }
 
-    /**
-     * Searches the car by the make
-     * @param make holds the car make
-     * @return list of the cars found
-     */
-    public List<Car> findCarsByMake(String make) {
-        List<Car> foundCars = new ArrayList<Car>();
+    @Override
+    public void add(Car t) {
+        this.carRepository.add(t);
+    }
 
-        for (Car car : carRepository.findAll()) {
+    @Override
+    public void delete(Car t) {
+        this.carRepository.delete(t);
+    }
+
+    @Override
+    public void update(Car t) {
+        this.carRepository.update(t);
+    }
+
+    /**
+     * Public method findCarsByMake searches cars by make.
+     *
+     * @param make holds value of car make
+     * @return list of found cars.
+     */
+
+    public List<Car> findCarsByMake(String make) {
+        List<Car> foundCars = new ArrayList<>();
+
+        for (Car car : carRepository.getAll()) {
             if (car.getMake().equalsIgnoreCase(make)) {
                 foundCars.add(car);
             }
@@ -40,16 +58,18 @@ public class CarServiceImpl implements CarService {
     }
 
     /**
-     * Searches the car by the make and model
-     * @param make holds the car make
-     * @param model holds the car model
-     * @return list of the cars found
+     * Public method findCarsByMakeAndModel searches cars by make and model.
+     *
+     * @param make  holds value of car make
+     * @param model holds value f car model
+     * @return list of found cars.
      */
     public List<Car> findCarsByMakeAndModel(String make, String model) {
-        List<Car> foundCars = new ArrayList<Car>();
+        List<Car> foundCars = new ArrayList<>();
 
-        for (Car car : carRepository.findAll()) {
-            if ((car.getModel().equalsIgnoreCase(model)) && (car.getMake().equalsIgnoreCase(make))) {
+        for (Car car : carRepository.getAll()) {
+            if ((car.getModel().equalsIgnoreCase(String.valueOf(model)))
+                    && (car.getMake().equalsIgnoreCase(String.valueOf(make)))) {
                 foundCars.add(car);
             }
         }
@@ -58,23 +78,33 @@ public class CarServiceImpl implements CarService {
     }
 
     /**
-     * Searches the car by the make, model, color and noofseats
-     * @param make holds the car make
-     * @param model holds the car model
-     * @param color holds the car color
-     * @param noofseats holds the car number of seats
-     * @return list of the cars found
+     * Public method findCarsByMakeModelColorAndSeats searches cars by make, model, color, seats.
+     *
+     * @param make  value of car make
+     * @param model value of car model
+     * @param color value of car color
+     * @return list of found cars
      */
-    public List<Car> findCarsByMultipleCategories(String make, String model, String color, int noofseats) {
-        List<Car> foundCars = new ArrayList<Car>();
+    public List<Car> findCarsByMakeModelColor(String make, String model, String color) {
+        List<Car> foundCars = new ArrayList<>();
 
-        for (Car car : carRepository.findAll()) {
-            if ((car.getModel().equalsIgnoreCase(model)) && (car.getMake().equalsIgnoreCase(make))
-                    && (car.getColor().equalsIgnoreCase(color)) && (car.getNoofseats() == noofseats)) {
+        for (Car car : carRepository.getAll()) {
+            if ((car.getModel().equalsIgnoreCase(model))
+                    && (car.getMake().equalsIgnoreCase(make))
+                    && (car.getColor().equalsIgnoreCase(color))) {
                 foundCars.add(car);
             }
         }
 
         return foundCars;
     }
+
+    public CarRepository<Car> getCarRepository() {
+        return carRepository;
+    }
+
+    public void setCarRepository(CarRepository<Car> carRepository) {
+        this.carRepository = carRepository;
+    }
 }
+
