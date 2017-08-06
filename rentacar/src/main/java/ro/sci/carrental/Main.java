@@ -13,6 +13,7 @@ import ro.sci.carrental.service.CustomerService;
 import ro.sci.carrental.service.CustomerServiceImpl;
 import ro.sci.carrental.simulation.CarSimulation;
 import ro.sci.carrental.simulation.CustomerSimulation;
+import ro.sci.carrental.simulation.ThreadSimulation;
 import ro.sci.carrental.writer.CarWriter;
 import ro.sci.carrental.writer.CustomerWriter;
 
@@ -27,7 +28,7 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String[] args) throws InvalidEntityException {
+    public static void main(String[] args) throws InvalidEntityException, InterruptedException {
 
         File carsFile = new File("cars.txt");
         EntityReader entityReader = new EntityReader();
@@ -66,6 +67,8 @@ public class Main {
         CustomerWriter customerWriter = new CustomerWriter();
         customerWriter.writeObjects(customerRepository.getAll(), outCustomers);
 
-
+        //simulare cu threaduri
+        ThreadSimulation threadSimulation = new ThreadSimulation();
+        ThreadSimulation.simulate(carService);
     }
 }

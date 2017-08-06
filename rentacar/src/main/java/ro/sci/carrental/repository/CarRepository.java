@@ -62,4 +62,10 @@ public interface CarRepository<T extends Car>  extends Repository<T>{
      * @param t
      */
     void update(T t);
+
+    void reserve(T t);
+
+    void freeup(T t);
+
+    int getCapacity();
 }

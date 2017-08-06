@@ -13,7 +13,7 @@ import java.util.List;
 public class CarRepositoryImpl implements CarRepository<Car> {
 
     private List<Car> cars = new ArrayList<>();
-
+    private int capacity  = 4;
 
     public List<Car> getAll() {
         return cars;
@@ -62,6 +62,20 @@ public class CarRepositoryImpl implements CarRepository<Car> {
 
     public void update(Car car) {
         cars.set(cars.indexOf(car), car);
+    }
+
+    public void reserve(Car car) {
+        car.isAvailable(false);
+    }
+
+    @Override
+    public void freeup(Car car) {
+        car.isAvailable(true);
+    }
+
+    @Override
+    public int getCapacity() {
+        return capacity;
     }
 }
 
